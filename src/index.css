@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F1F5F9;
+  --bg-surface: #E2E8F0;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --accent-primary: #10B981;
+  --accent-hover: #059669;
+  --accent-glow: rgba(16, 185, 129, 0.12);
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #3B82F6;
+  --border-default: #E2E8F0;
+  --border-hover: #CBD5E1;
+  --app-paytm: #00BAF2;
+  --app-phonepe: #5F259F;
+  --app-gpay: #4285F4;
+  --app-amazon: #FF9900;
+  --app-swiggy: #FC8019;
+  --app-zomato: #E23744;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  margin: 0;
+}
