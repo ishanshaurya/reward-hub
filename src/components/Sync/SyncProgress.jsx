@@ -17,7 +17,7 @@ class SyncErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <p style={{ color: "#EF4444", fontSize: 13 }}>
+        <p style={{ color: "#FF4757", fontSize: 13, fontFamily: "var(--font-primary)" }}>
           Sync widget crashed: {this.state.error?.message || "Unknown error"}
         </p>
       );
@@ -43,15 +43,15 @@ const STATUS_CONFIG = {
  *
  * @param {function} onSyncComplete - Called when sync finishes successfully
  */
-export default function SyncProgress({ onSyncComplete }) {
+export default function SyncProgress({ onSyncComplete, compact = false }) {
   return (
     <SyncErrorBoundary>
-      <SyncProgressInner onSyncComplete={onSyncComplete} />
+      <SyncProgressInner onSyncComplete={onSyncComplete} compact={compact} />
     </SyncErrorBoundary>
   );
 }
 
-function SyncProgressInner({ onSyncComplete }) {
+function SyncProgressInner({ onSyncComplete, compact }) {
   const { syncState, startSync, resetSync } = useGmailSync();
   // Map hook state names to local names used by this component
   const status = syncState.status;
@@ -90,8 +90,8 @@ function SyncProgressInner({ onSyncComplete }) {
         {isRunning ? "Syncing..." : isDone ? "Sync Again" : "Sync Gmail"}
       </button>
 
-      {/* Progress Panel — only visible during/after sync */}
-      {status !== "idle" && (
+      {/* Progress Panel — only visible during/after sync, hidden in compact mode */}
+      {!compact && status !== "idle" && (
         <div className="sync-panel">
           {/* Status row */}
           <div className={`sync-status sync-status--${status}`}>
@@ -149,28 +149,34 @@ function SyncProgressInner({ onSyncComplete }) {
           gap: 8px;
           padding: 10px 20px;
           background: var(--accent-primary);
-          color: #fff;
+          color: #000;
+          font-family: var(--font-primary);
           font-weight: 600;
-          font-size: 14px;
+          font-size: 13px;
           border: none;
-          border-radius: 8px;
+          border-radius: 10px;
           cursor: pointer;
-          transition: background 0.2s, opacity 0.2s;
+          transition: opacity 0.2s, transform 0.1s;
           width: fit-content;
+          letter-spacing: -0.01em;
         }
-        .btn-sync:hover:not(:disabled) { background: #059669; }
-        .btn-sync:disabled { opacity: 0.7; cursor: not-allowed; }
-        .btn-sync--running { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-default); }
+        .btn-sync:hover:not(:disabled) { opacity: 0.85; transform: scale(0.98); }
+        .btn-sync:disabled { opacity: 0.6; cursor: wait; }
+        .btn-sync--running {
+          background: var(--bg-tertiary);
+          color: var(--text-primary);
+          border: 1px solid var(--border-default);
+        }
 
-        .sync-icon { font-size: 16px; display: inline-block; }
+        .sync-icon { font-size: 14px; display: inline-block; }
         .spin { animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
         .sync-panel {
-          background: var(--bg-secondary);
+          background: var(--bg-card);
           border: 1px solid var(--border-default);
-          border-radius: 12px;
-          padding: 16px;
+          border-radius: 14px;
+          padding: 18px;
           display: flex;
           flex-direction: column;
           gap: 12px;
@@ -180,14 +186,15 @@ function SyncProgressInner({ onSyncComplete }) {
           display: flex;
           align-items: center;
           gap: 8px;
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 500;
+          font-family: var(--font-primary);
           color: var(--text-primary);
         }
 
         .sync-dot {
-          width: 8px;
-          height: 8px;
+          width: 7px;
+          height: 7px;
           border-radius: 50%;
           background: var(--text-muted);
           flex-shrink: 0;
@@ -195,15 +202,15 @@ function SyncProgressInner({ onSyncComplete }) {
         .sync-status--searching .sync-dot,
         .sync-status--fetching .sync-dot,
         .sync-status--parsing .sync-dot,
-        .sync-status--saving .sync-dot { background: var(--color-info); }
-        .sync-status--done .sync-dot { background: var(--color-success); }
-        .sync-status--error .sync-dot { background: var(--color-danger); }
-        .pulse { animation: pulse 1.2s ease-in-out infinite; }
-        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .sync-status--saving .sync-dot { background: #3B82F6; box-shadow: 0 0 6px rgba(59,130,246,0.5); }
+        .sync-status--done .sync-dot { background: var(--accent-primary); box-shadow: 0 0 6px rgba(0,208,132,0.5); }
+        .sync-status--error .sync-dot { background: #FF4757; box-shadow: 0 0 6px rgba(255,71,87,0.5); }
+        .pulse { animation: pulse-dot 1.2s ease-in-out infinite; }
+        @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         .sync-bar-wrap {
-          height: 4px;
-          background: var(--bg-tertiary);
+          height: 3px;
+          background: rgba(255,255,255,0.04);
           border-radius: 2px;
           overflow: hidden;
         }
@@ -212,6 +219,7 @@ function SyncProgressInner({ onSyncComplete }) {
           background: var(--accent-primary);
           border-radius: 2px;
           transition: width 0.4s ease;
+          box-shadow: 0 0 8px rgba(0,208,132,0.3);
         }
 
         .sync-stats {
@@ -224,40 +232,53 @@ function SyncProgressInner({ onSyncComplete }) {
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 6px 12px;
+          padding: 8px 14px;
           background: var(--bg-tertiary);
-          border-radius: 8px;
+          border: 1px solid var(--border-default);
+          border-radius: 10px;
           min-width: 60px;
-          transition: background 0.2s;
+          transition: all 0.2s;
         }
-        .stat-pill--active { background: rgba(16,185,129,0.1); }
-        .stat-pill--highlight { background: rgba(16,185,129,0.2); }
+        .stat-pill--active {
+          background: rgba(0,208,132,0.06);
+          border-color: var(--border-accent);
+        }
+        .stat-pill--highlight {
+          background: rgba(0,208,132,0.1);
+          border-color: rgba(0,208,132,0.3);
+        }
         .stat-pill__value {
           font-family: var(--font-mono);
           font-size: 18px;
-          font-weight: 700;
+          font-weight: 600;
           color: var(--text-primary);
+          letter-spacing: -0.02em;
         }
-        .stat-pill--highlight .stat-pill__value { color: var(--accent-primary); }
+        .stat-pill--highlight .stat-pill__value { color: var(--accent-primary); text-shadow: 0 0 12px rgba(0,208,132,0.3); }
         .stat-pill__label {
-          font-size: 11px;
+          font-size: 10px;
           font-weight: 500;
+          font-family: var(--font-primary);
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
           color: var(--text-muted);
+          margin-top: 2px;
         }
 
         .sync-error {
-          font-size: 13px;
-          color: var(--color-danger);
+          font-size: 12px;
+          font-family: var(--font-primary);
+          color: #FF4757;
           margin: 0;
-          padding: 8px 12px;
-          background: rgba(239,68,68,0.1);
-          border-radius: 6px;
+          padding: 10px 14px;
+          background: rgba(255,71,87,0.06);
+          border: 1px solid rgba(255,71,87,0.15);
+          border-radius: 8px;
         }
 
         .sync-done-msg {
-          font-size: 13px;
+          font-size: 12px;
+          font-family: var(--font-primary);
           color: var(--text-secondary);
           margin: 0;
         }

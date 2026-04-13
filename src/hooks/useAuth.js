@@ -9,7 +9,6 @@ async function fetchOrUpsertProfile(user, setProfile, setProfileError) {
     }
 
     // Upsert so the row exists even if the DB trigger missed it
-    console.log("Profile upsert attempted")
     const { error: upsertError } = await supabase
         .from('profiles')
         .upsert(

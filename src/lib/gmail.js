@@ -5,7 +5,7 @@
 const GMAIL_BASE = "https://gmail.googleapis.com/gmail/v1/users/me";
 
 // Master search query — matches reward emails from all supported apps
-const SEARCH_QUERY = `(cashback OR refund OR reward OR coupon OR "cash back" OR "points earned" OR "money credited" OR "amount credited" OR "scratch card" OR expires OR expiring)`;
+const SEARCH_QUERY = `subject:(cashback OR reward OR coupon OR refund OR "scratch card" OR "points earned") AND (cashback OR reward OR coupon OR refund)`;
 
 /**
  * Search Gmail for reward-related emails.
@@ -26,19 +26,15 @@ export async function searchRewardEmails(accessToken, maxResults = 100, onProgre
     });
     if (pageToken) params.set("pageToken", pageToken);
 
-    console.log("[Gmail] Starting search with token:", accessToken?.slice(0,20) + "...");
     const res = await fetch(`${GMAIL_BASE}/messages?${params}`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    console.log("[Gmail] Search response status:", res.status);
-
     if (!res.ok) {
       const err = await res.json();
       throw new Error(`Gmail search failed: ${err.error?.message || res.statusText}`);
     }
 
     const data = await res.json();
-    console.log("[Gmail] Raw search result:", JSON.stringify(data).slice(0, 500));
     const messages = data.messages || [];
     allMessages.push(...messages);
 
@@ -47,7 +43,6 @@ export async function searchRewardEmails(accessToken, maxResults = 100, onProgre
     pageToken = data.nextPageToken || null;
   } while (pageToken && allMessages.length < maxResults);
 
-  console.log("[Gmail] Messages found:", allMessages.length);
   return allMessages;
 }
 
@@ -182,9 +177,14 @@ function extractBodyFromPayload(payload) {
  */
 function decodeBase64Url(encoded) {
   try {
-    // Replace base64url chars with standard base64 chars
-    const base64 = encoded.replace(/-/g, "+").replace(/_/g, "/");
-    return atob(base64);
+    // Replace base64url chars with standard base64 chars, then decode as UTF-8
+    const decoded = decodeURIComponent(
+      atob(encoded.replace(/-/g, '+').replace(/_/g, '/'))
+        .split('')
+        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    return decoded;
   } catch {
     return "";
   }
