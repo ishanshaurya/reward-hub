@@ -22,7 +22,7 @@ const REFUND_REGEX =
 
 // Expiry: "expires on 25 Dec 2025", "valid till 31/01/2026", "expiring in 3 days"
 const EXPIRY_REGEX =
-  /(?:expires?|valid\s*till|expir(?:ing|y))\s*(?:on|by|:)?\s*(\d{1,2}[\s\/-]\w{3,9}[\s\/-]\d{2,4}|\d{1,2}\/\d{1,2}\/\d{2,4})|expir(?:ing|es?)\s*in\s*(\d+)\s*days?/gi;
+  /(?:expires?|valid\s*till|expir(?:ing|y)|expiry\s*date)\s*(?:on|by|:)?\s*(\d{1,2}[\s\/-]\w{3,9}[\s\/-]\d{2,4}|\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})|expir(?:ing|es?)\s*in\s*(\d+)\s*days?/gi;
 
 // General amount (fallback)
 const AMOUNT_REGEX = /(?:₹|Rs\.?\s*)(\d+(?:,\d{3})*(?:\.\d{1,2})?)/g;
@@ -212,6 +212,12 @@ export function extractExpiry(subject, body, emailDate) {
 
   // Absolute date string — try to parse
   if (match[1]) {
+    // Handle DD/MM/YYYY or DD-MM-YYYY → convert to parseable format
+    if (/^\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}$/.test(match[1])) {
+      const [day, month, year] = match[1].split(/[\/\-]/);
+      return new Date(`${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')}`).toISOString().split('T')[0];
+    }
+
     const parsed = new Date(match[1]);
     if (!isNaN(parsed.getTime())) {
       return parsed.toISOString().split("T")[0];
@@ -269,5 +275,6 @@ export function parseEmailToReward(email) {
  * @returns {Array} Array of reward objects
  */
 export function parseEmailBatch(emails) {
+  if (!Array.isArray(emails)) emails = [emails]; // defensive fix
   return emails.map(parseEmailToReward).filter(Boolean);
 }

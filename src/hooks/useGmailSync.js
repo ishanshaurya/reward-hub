@@ -57,14 +57,14 @@ export function useGmailSync() {
         }
 
         // 2. Start sync — reset state
-        setSyncState({ ...INITIAL_STATE, status: "syncing" });
+        setSyncState({ ...INITIAL_STATE, status: "searching" });
 
         try {
             // 3. Search Gmail for reward emails
             const messageStubs = await searchRewardEmails(accessToken);
             const totalFound = messageStubs.length;
 
-            setSyncState((prev) => ({ ...prev, found: totalFound }));
+            setSyncState((prev) => ({ ...prev, status: "fetching", found: totalFound }));
 
             if (totalFound === 0) {
                 setSyncState((prev) => ({ ...prev, status: "done" }));
@@ -91,7 +91,9 @@ export function useGmailSync() {
                     setSyncState((prev) => ({ ...prev, fetched: prev.fetched + 1 }));
 
                     // Parse into reward objects
-                    const rewards = parseEmailBatch(emailData);
+                    setSyncState((prev) => ({ ...prev, status: "parsing" }));
+                    const rewards = parseEmailBatch([emailData]);
+                    // rewards parsed
 
                     if (!rewards || rewards.length === 0) continue;
 
@@ -101,20 +103,27 @@ export function useGmailSync() {
                     }));
 
                     // 6. Save each reward to Supabase (dedup via unique constraint)
+                    setSyncState((prev) => ({ ...prev, status: "saving" }));
                     for (const reward of rewards) {
+                        const safeReward = {
+                            ...reward,
+                            app_name: reward.app_name || 'Other',
+                            reward_type: reward.reward_type || 'other',
+                            email_date: reward.email_date || new Date().toISOString(),
+                        };
                         const { error: insertError } = await supabase
                             .from("rewards")
                             .insert({
                                 user_id: userId,
                                 gmail_message_id: stub.id,
-                                app_name: reward.app,
-                                reward_type: reward.type,
-                                amount: reward.amount ?? null,
-                                coupon_code: reward.couponCode ?? null,
-                                email_date: reward.date,
-                                expiry_date: reward.expiry ?? null,
-                                subject_line: reward.subject ?? null,
-                                snippet: reward.snippet ?? null,
+                                app_name: safeReward.app_name,
+                                reward_type: safeReward.reward_type,
+                                amount: safeReward.amount ?? null,
+                                coupon_code: safeReward.coupon_code ?? null,
+                                email_date: safeReward.email_date,
+                                expiry_date: safeReward.expiry_date ?? null,
+                                subject_line: safeReward.subject_line ?? null,
+                                snippet: safeReward.snippet ?? null,
                             });
 
                         if (insertError) {
