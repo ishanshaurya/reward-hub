@@ -54,6 +54,9 @@ export function useAuth() {
         supabase.auth.getSession().then(({ data: { session } }) => {
             const u = session?.user ?? null
             setUser(u)
+            if (session?.provider_token) {
+                localStorage.setItem('gmail_token', session.provider_token)
+            }
             initialUpsertDone.current = true
             fetchOrUpsertProfile(u, setProfile, setProfileError).finally(() =>
                 setLoading(false)
@@ -69,8 +72,12 @@ export function useAuth() {
                 if (!initialUpsertDone.current) return
                 // SIGNED_IN after the initial load means a real new sign-in
                 if (_event === 'SIGNED_IN' || _event === 'TOKEN_REFRESHED') {
+                    if (session?.provider_token) {
+                        localStorage.setItem('gmail_token', session.provider_token)
+                    }
                     fetchOrUpsertProfile(u, setProfile, setProfileError)
                 } else if (_event === 'SIGNED_OUT') {
+                    localStorage.removeItem('gmail_token')
                     setProfile(null)
                     setProfileError(null)
                 }
