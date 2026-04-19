@@ -92,7 +92,7 @@ export function useAuth() {
             provider: 'google',
             options: {
                 scopes: 'https://www.googleapis.com/auth/gmail.readonly',
-                redirectTo: window.location.origin,
+                redirectTo: `${window.location.origin}/dashboard`,
             },
         })
     }
