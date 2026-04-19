@@ -43,7 +43,8 @@ export function useGmailSync() {
             return;
         }
 
-        const accessToken = sessionData.session.provider_token;
+        const accessToken = sessionData.session.provider_token
+            || localStorage.getItem('gmail_token');
         const userId = sessionData.session.user.id;
 
         if (!accessToken) {

@@ -1,7 +1,7 @@
 // src/components/Dashboard/AppBreakdownChart.jsx
 // RewardHub — Donut chart showing reward breakdown by payment app
 
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 const APP_COLORS = {
   Paytm: "#00BAF2",
@@ -118,8 +118,8 @@ export default function AppBreakdownChart({ stats }) {
         </div>
       ) : (
         <>
-          <div style={{ height: 280 }}>
-            <ResponsiveContainer width="100%" height="100%">
+          <div style={{ width: '100%', height: 300 }}>
+            <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
                   data={data}
