@@ -1,5 +1,5 @@
 // src/components/LoadingStates.jsx
-// RewardHub — Skeleton loaders + empty state components
+// FinPulse — Skeleton loaders + empty state components
 
 import React from 'react';
 import { AlertCircle, RefreshCw } from 'lucide-react';

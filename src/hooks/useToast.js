@@ -1,5 +1,5 @@
 // src/hooks/useToast.js
-// RewardHub — Simple toast notification hook
+// FinPulse — Simple toast notification hook
 
 import { useState, useCallback } from 'react'
 

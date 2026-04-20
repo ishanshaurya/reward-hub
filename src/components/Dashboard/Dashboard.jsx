@@ -1,5 +1,5 @@
 // src/components/Dashboard/Dashboard.jsx
-// RewardHub — Dashboard content area (sync state passed in from pages/Dashboard)
+// FinPulse — Dashboard content area (sync state passed in from pages/Dashboard)
 
 import { useEffect, useState } from "react";
 import SummaryCards from "./SummaryCards";

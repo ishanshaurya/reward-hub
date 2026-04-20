@@ -21,7 +21,7 @@ export default function LandingPage({ onSignInClick, onDemoClick }) {
       >
         <div className="flex items-center">
           <span style={{ display: 'inline-block', width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent-primary)', marginRight: '8px', boxShadow: '0 0 8px rgba(0,208,132,0.6)' }} />
-          <span style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>RewardHub</span>
+          <span style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>FinPulse</span>
         </div>
         <button
           onClick={onSignInClick}
@@ -51,7 +51,7 @@ export default function LandingPage({ onSignInClick, onDemoClick }) {
           </span>
         </h1>
         <p style={{ fontFamily: 'var(--font-primary)', fontSize: '17px', color: 'var(--text-secondary)', maxWidth: '560px', margin: '0 auto 40px', lineHeight: 1.6, letterSpacing: '-0.01em' }}>
-          Stop juggling multiple payment apps. RewardHub connects your Gmail to show all cashback, coupons, and expiring rewards in one unified dashboard.
+          Stop juggling multiple payment apps. FinPulse connects your Gmail to show all cashback, coupons, and expiring rewards in one unified dashboard.
         </p>
 
         {/* CTA Buttons */}
@@ -157,7 +157,7 @@ export default function LandingPage({ onSignInClick, onDemoClick }) {
 
       {/* Features Section */}
       <section style={{ maxWidth: '1100px', margin: '0 auto', padding: '80px 24px' }}>
-        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 700, textAlign: 'center', letterSpacing: '-0.03em', marginBottom: '48px' }}>Why RewardHub?</h2>
+        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 700, textAlign: 'center', letterSpacing: '-0.03em', marginBottom: '48px' }}>Why FinPulse?</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
@@ -231,7 +231,7 @@ export default function LandingPage({ onSignInClick, onDemoClick }) {
       {/* Footer */}
       <footer style={{ borderTop: '1px solid var(--border-default)', padding: '24px 0', textAlign: 'center' }}>
         <p style={{ fontFamily: 'var(--font-primary)', fontSize: '12px', color: 'var(--text-muted)' }}>
-          &copy; 2025 RewardHub. A portfolio project showcasing Gmail API + React integration.
+          &copy; 2025 FinPulse. A portfolio project showcasing Gmail API + React integration.
         </p>
       </footer>
     </div>

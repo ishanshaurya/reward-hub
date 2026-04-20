@@ -1,5 +1,5 @@
 // src/components/Layout/Navbar.jsx
-// RewardHub — Top navigation with logo, user avatar, and Sync Now CTA
+// FinPulse — Top navigation with logo, user avatar, and Sync Now CTA
 
 const syncPulse = `
 @keyframes ring-pulse {
@@ -84,7 +84,7 @@ export default function Navbar({ user, onSignOut, demoMode, onSync, isSyncing })
               letterSpacing: '-0.02em',
             }}
           >
-            RewardHub
+            FinPulse
           </span>
           {demoMode && (
             <span

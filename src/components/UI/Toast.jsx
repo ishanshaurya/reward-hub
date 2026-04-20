@@ -1,5 +1,5 @@
 // src/components/UI/Toast.jsx
-// RewardHub — Slide-in toast notification component
+// FinPulse — Slide-in toast notification component
 
 const TOAST_STYLES = {
   success: { bg: 'rgba(0,208,132,0.15)',  border: 'rgba(0,208,132,0.4)',  text: '#00D084', icon: '✓' },

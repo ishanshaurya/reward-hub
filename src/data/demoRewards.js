@@ -1,5 +1,5 @@
 // src/data/demoRewards.js
-// RewardHub — Realistic demo data for "Try Demo" mode
+// FinPulse — Realistic demo data for "Try Demo" mode
 // Field names match the Supabase rewards schema exactly
 
 const now = new Date();

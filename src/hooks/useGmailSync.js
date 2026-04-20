@@ -1,5 +1,5 @@
 // src/hooks/useGmailSync.js
-// RewardHub — Gmail sync hook
+// FinPulse — Gmail sync hook
 // FIX: handleError moved inside the hook so it has access to setSyncState
 
 import { useState, useCallback } from "react";

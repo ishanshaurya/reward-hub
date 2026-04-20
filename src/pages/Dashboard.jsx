@@ -1,5 +1,5 @@
 // src/pages/Dashboard.jsx
-// RewardHub — Protected dashboard page: wires auth, rewards, and Gmail sync
+// FinPulse — Protected dashboard page: wires auth, rewards, and Gmail sync
 
 import { useEffect, useState } from 'react'
 import { useSearchParams, Navigate } from 'react-router-dom'

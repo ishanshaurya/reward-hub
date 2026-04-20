@@ -1,5 +1,5 @@
 // components/Sync/SyncProgress.jsx
-// RewardHub — Sync Progress Indicator
+// FinPulse — Sync Progress Indicator
 // Shows live status during Gmail fetch + parse cycle
 
 import { Component } from "react";
