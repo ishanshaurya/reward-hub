@@ -1,5 +1,5 @@
 // src/components/Dashboard/ExpiryAlerts.jsx
-// RewardHub — Rewards expiring in the next 7 days
+// FinPulse — Rewards expiring in the next 7 days
 
 const APP_BADGE_STYLES = {
   Paytm: { background: "rgba(0,186,242,0.1)", color: "#00BAF2" },

@@ -1,5 +1,5 @@
 // src/components/UI/Skeleton.jsx
-// RewardHub — Reusable loading skeleton components
+// FinPulse — Reusable loading skeleton components
 
 const pulse = { animation: 'pulse 1.5s infinite' }
 

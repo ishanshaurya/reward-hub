@@ -1,5 +1,5 @@
 // lib/parser.js
-// RewardHub — Regex Parsing Engine
+// FinPulse — Regex Parsing Engine
 // Takes a parsed email object and extracts structured reward data
 
 // ─── Regex Patterns ───────────────────────────────────────────────────────────

@@ -1,5 +1,5 @@
 // src/components/Dashboard/FilterBar.jsx
-// RewardHub — Filter bar for app, type, and date range
+// FinPulse — Filter bar for app, type, and date range
 
 const DATE_OPTIONS = [
   { value: "all", label: "All Time" },

@@ -1,5 +1,5 @@
 // src/pages/LandingPage.jsx
-// RewardHub — Landing page route: handles sign-in and demo navigation
+// FinPulse — Landing page route: handles sign-in and demo navigation
 
 import { useNavigate, Navigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'

@@ -1,5 +1,5 @@
 // lib/gmail.js
-// RewardHub — Gmail API fetch module
+// FinPulse — Gmail API fetch module
 // Handles: search, fetch, decode, and strip email bodies
 
 const GMAIL_BASE = "https://gmail.googleapis.com/gmail/v1/users/me";

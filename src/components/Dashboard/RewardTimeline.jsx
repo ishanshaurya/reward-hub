@@ -1,5 +1,5 @@
 // src/components/Dashboard/RewardTimeline.jsx
-// RewardHub — Scrollable reward list with claimed toggle and app-colored badges
+// FinPulse — Scrollable reward list with claimed toggle and app-colored badges
 
 const APP_BADGE_STYLES = {
   Paytm: { background: "rgba(0,186,242,0.1)", color: "#00BAF2" },

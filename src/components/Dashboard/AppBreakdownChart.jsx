@@ -1,5 +1,5 @@
 // src/components/Dashboard/AppBreakdownChart.jsx
-// RewardHub — Donut chart showing reward breakdown by payment app
+// FinPulse — Donut chart showing reward breakdown by payment app
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 

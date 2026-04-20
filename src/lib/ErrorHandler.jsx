@@ -1,5 +1,5 @@
 // src/lib/ErrorHandler.js
-// RewardHub — Centralized error handling + toast notifications
+// FinPulse — Centralized error handling + toast notifications
 
 import { useState, useEffect } from 'react';
 
@@ -20,17 +20,17 @@ export const ERROR_MESSAGES = {
   UNKNOWN_ERROR: 'Something went wrong. Please try again.',
 };
 
-export class RewardHubError extends Error {
+export class FinPulseError extends Error {
   constructor(message, code = 'UNKNOWN_ERROR', originalError = null) {
     super(message);
-    this.name = 'RewardHubError';
+    this.name = 'FinPulseError';
     this.code = code;
     this.originalError = originalError;
   }
 }
 
 export function handleError(error) {
-  if (error instanceof RewardHubError) {
+  if (error instanceof FinPulseError) {
     return {
       message: error.message,
       code: error.code,

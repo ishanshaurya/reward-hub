@@ -1,5 +1,5 @@
 // src/components/Dashboard/SummaryCards.jsx
-// RewardHub — Summary stat cards with skeleton loading and staggered fade-in
+// FinPulse — Summary stat cards with skeleton loading and staggered fade-in
 
 import { useState, useEffect } from "react";
 

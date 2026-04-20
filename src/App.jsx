@@ -1,5 +1,5 @@
 // src/App.jsx
-// RewardHub — Root: sets up router, error boundary, and toast container
+// FinPulse — Root: sets up router, error boundary, and toast container
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useToast } from './hooks/useToast'
