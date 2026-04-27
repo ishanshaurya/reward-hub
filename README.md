@@ -4,10 +4,10 @@
 
 FinPulse connects to your Gmail via OAuth2 and automatically parses cashback, coupon, refund, and points emails from Paytm, PhonePe, Google Pay, Amazon Pay, Swiggy, and Zomato — no manual entry, no missed expiry dates.
 
-![Tech Stack](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite)
-![Tailwind](https://img.shields.io/badge/Tailwind-4-38BDF8?style=flat-square&logo=tailwindcss)
-![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat-square&logo=supabase)
+![Tech Stack](https://img.shields.io/badge/React-19-61DAFB?style=flat-square)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square)
+![Tailwind](https://img.shields.io/badge/Tailwind-4-38BDF8?style=flat-square)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat-square)
 
 ---
 
